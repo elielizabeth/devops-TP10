@@ -74,11 +74,17 @@ jobs:
         with:
           version: 'v3.13.0'
 
-      - name: Configurar Kubeconfig
-        run: |
-          mkdir -p ~/.kube
-          echo "${{ secrets.KUBECONFIG_RAW }}" > ~/.kube/config
-          chmod 600 ~/.kube/config
+      #- name: Configurar Kubeconfig
+        #run: |
+          #mkdir -p ~/.kube
+          #echo "${{ secrets.KUBECONFIG_RAW }}" > ~/.kube/config
+          #chmod 600 ~/.kube/config
+
+      # --- CREAR CLÚSTER TEMPORAL DENTRO DE GITHUB ACTIONS ---
+      - name: Crear clúster Kubernetes local en Runner (Kind)
+        uses: helm/kind-action@v1.8.0
+        with:
+          cluster_name: staging-cluster
 
       - name: Actualizar/Instalar Release en Staging
         run: |
@@ -116,11 +122,17 @@ jobs:
         with:
           version: 'v3.13.0'
 
-      - name: Configurar Kubeconfig
-        run: |
-          mkdir -p ~/.kube
-          echo "${{ secrets.KUBECONFIG_RAW }}" > ~/.kube/config
-          chmod 600 ~/.kube/config
+      #- name: Configurar Kubeconfig
+        #run: |
+          #mkdir -p ~/.kube
+          #echo "${{ secrets.KUBECONFIG_RAW }}" > ~/.kube/config
+          #chmod 600 ~/.kube/config
+
+      # --- CREAR CLÚSTER TEMPORAL DENTRO DE GITHUB ACTIONS ---
+      - name: Crear clúster Kubernetes local en Runner (Kind)
+        uses: helm/kind-action@v1.8.0
+        with:
+          cluster_name: staging-cluster
 
       - name: Desplegar Release en Producción
         id: helm_deploy
