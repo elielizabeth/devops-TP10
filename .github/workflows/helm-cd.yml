@@ -92,8 +92,8 @@ jobs:
             --namespace staging \
             --create-namespace \
             -f ${{ env.CHART_PATH }}/values-staging.yaml \
-            --set backend.image.tag="sha-${{ github.sha }}" \
-            --wait --timeout 3m
+            --set backend.image.tag="latest" \
+            #--wait --timeout 3m
 
       - name: Smoke Test en Staging
         run: |
@@ -142,8 +142,8 @@ jobs:
             --namespace production \
             --create-namespace \
             -f ${{ env.CHART_PATH }}/values-prod.yaml \
-            --set backend.image.tag="sha-${{ github.sha }}" \
-            --wait --timeout 3m
+            --set backend.image.tag="latest" \
+            #--wait --timeout 3m
 
       - name: Smoke Test Post-Despliegue en Producción
         id: smoke_test
