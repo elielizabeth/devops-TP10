@@ -101,7 +101,6 @@ jobs:
           #STATUS=$(kubectl exec -n staging deployment/notes-frontend -- curl -s -o /dev/null -w "%{http_code}" http://notes-backend:5000/health || echo "000")
           STATUS=$(kubectl exec -n staging deployment/backend -- curl -s -o /dev/null -w "%{http_code}" http://localhost:5000/health || echo "200")
           if [ "$STATUS" = "200" ]; then
-          if [ "$STATUS" = "200" ]; then
             echo "Staging respondiendo 200 OK en /health"
           else
             echo "Fallo crítico en Staging: HTTP $STATUS"
