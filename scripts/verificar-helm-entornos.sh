@@ -35,7 +35,7 @@ done
 
 info "2. Verificación de Réplicas y Recursos por Entorno"
 eval_check
-STAGING_REPLICAS=$(kubectl get deployment notes-backend -n staging -o jsonpath='{.spec.replicas}' 2>/dev/null || echo "0")
+STAGING_REPLICAS=$(kubectl get deployment backend -n staging -o jsonpath='{.spec.replicas}' 2>/dev/null || echo "0")
 if [ "$STAGING_REPLICAS" -eq 1 ]; then
     ok "Staging configurado correctamente con $STAGING_REPLICAS réplica."
 else
@@ -43,7 +43,7 @@ else
 fi
 
 eval_check
-PROD_REPLICAS=$(kubectl get deployment notes-backend -n production -o jsonpath='{.spec.replicas}' 2>/dev/null || echo "0")
+PROD_REPLICAS=$(kubectl get deployment backend -n production -o jsonpath='{.spec.replicas}' 2>/dev/null || echo "0")
 if [ "$PROD_REPLICAS" -ge 2 ]; then
     ok "Producción configurado con Alta Disponibilidad: $PROD_REPLICAS réplicas."
 else
@@ -69,8 +69,9 @@ fi
 
 info "4. Auditoría de Historial de Helm (Capacidad de Rollback)"
 eval_check
-REVS=$(helm history notes-prod -n production 2>/dev/null | wc -l || echo "0")
-if [ "$REVS" -ge 3 ]; then
+#REVS=$(helm history notes-prod -n production 2>/dev/null | wc -l || echo "0")
+REVS=$(helm history notes-prod -n production 2>/dev/null | tail -n +2 | wc -l | tr -d ' ' || echo "0")
+if [ "$REVS" -ge 2 ]; then
     ok "Historial de Helm preservado en Producción (Revisión actual registrada)."
 else
     fail "No se registra historial suficiente para ejecutar rollback en Producción."
