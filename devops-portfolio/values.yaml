@@ -31,7 +31,7 @@ postgres:
 # ── Backend Flask ─────────────────────────────────────────
 backend:
   image:
-    repository: elielizabeth/devops-tp06-backend
+    repository: elielizabeth/devops-tp08-backend
     tag: "latest"
     pullPolicy: Always
   replicas: 2
@@ -55,7 +55,7 @@ backend:
 # ── Frontend Nginx ────────────────────────────────────────
 frontend:
   image:
-    repository: elielizabeth/devops-tp06-frontend
+    repository: elielizabeth/devops-tp08-frontend
     tag: "latest"
     pullPolicy: Always
   replicas: 2

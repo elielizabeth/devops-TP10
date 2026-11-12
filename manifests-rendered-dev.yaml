@@ -194,8 +194,8 @@ spec:
             - until nc -z postgres-service 5432; do echo "Esperando DB..."; sleep 2; done
       containers:
         - name: backend
-          image: "elielizabeth/devops-tp06-backend:latest"
-          imagePullPolicy: IfNotPresent
+          image: "elielizabeth/devops-tp08-backend"
+          imagePullPolicy: Always
           ports:
             - containerPort: 5000
           envFrom:
@@ -266,7 +266,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: "elielizabeth/devops-tp06-frontend:latest"
+          image: "elielizabeth/devops-tp08-frontend"
           imagePullPolicy: Always
           ports:
             - containerPort: 80

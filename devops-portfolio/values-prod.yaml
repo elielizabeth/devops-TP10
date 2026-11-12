@@ -5,7 +5,7 @@ global:
 backend:
   replicas: 2
   image:
-    repository: TU_USUARIO_DOCKERHUB/devops-portfolio
+    repository: elielizabeth/devops-tp08-backend:latest
     tag: latest
     pullPolicy: IfNotPresent
   resources:
